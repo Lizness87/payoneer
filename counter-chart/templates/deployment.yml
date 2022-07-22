@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter-service
+  labels:
+    app: counter-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: counter-service
+  template:
+    metadata:
+      labels:
+        app: counter-service
+    spec:
+      containers:
+        - name: counter-service
+          image: lizmiller/payoneer
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80

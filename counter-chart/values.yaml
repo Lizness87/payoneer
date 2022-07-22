@@ -1,0 +1,28 @@
+replicaCount: 2
+
+image:
+  repository: lizmiller/payoneer
+  tag: latest
+  pullPolicy: IfNotPresent
+imageCredentials:
+  registry: docker.io
+  username: lizmiller
+  password: Mubtnh289!
+service:
+  type: NodePort
+  port: 80
+
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 120
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 6
+  successThreshold: 1
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 30
+  periodSeconds: 5
+  timeoutSeconds: 3
+  failureThreshold: 6
+  successThreshold: 1

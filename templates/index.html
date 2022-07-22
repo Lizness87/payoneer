@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Counter Service</title>
+</head>
+<style>
+    .content {
+    font-family: arial;
+    font-size: 24px;    
+    width: 400px;
+    margin: 0 auto;
+    }
+    .text-center {
+    text-align: center;
+    }
+    </style>
+<body>
+<div class="content">
+    <h1>Counter Service</h1>
+    <form>
+        <div class="text-center">
+        <button type="submit" formaction="/request-counter" formmethod="get">Send GET request</button>
+        <button type="submit" formaction="/request-counter" formmethod="post">Send POST Request</button>
+    </div>
+    </form>
+</div>
+</body>
+</html>

@@ -24,7 +24,7 @@ jobs:
         file: ./Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/{{ secrets.REPO_NAME }}:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.REPO_NAME }}:latest
         cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/{{ secrets.REPO_NAME }}:latest:buildcache #use caching to reduce the build time
         cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/{{ secrets.REPO_NAME }}:latest:buildcache,mode=max
   Deploy: # job name

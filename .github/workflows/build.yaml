@@ -16,8 +16,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ secrets.repo_name }}/${{ secrets.DOCKERHUB_USERNAME }}
-          tags: ${{ secrets.repo_name }}/${{ secrets.DOCKERHUB_USERNAME }}:latest  
+          images: ${{ secrets.repo_name }}/${{ secrets.DOCKERHUB_USERNAME }}:latest
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:

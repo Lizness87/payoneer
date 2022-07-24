@@ -12,12 +12,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: Login to DockerHub
       - name: Extract metadata (tags, labels) for Docker
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: ${{ secrets.repo_name }}/${{ secrets.DOCKERHUB_USERNAME }}:latest
+          images: ${{ secrets.repo_name }}/${{ secrets.DOCKERHUB_USERNAME }}:latest  
+      - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -28,8 +28,9 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          cache-from: type=registry,ref=${{ steps.meta.outputs.tags }}
+          cache-from: type=registry,ref= ${{ steps.meta.outputs.tags }}
           cache-to: type=inline
+          
   Deploy: # job name
     needs: push-image-to-docker-hub
     runs-on: ubuntu-latest   

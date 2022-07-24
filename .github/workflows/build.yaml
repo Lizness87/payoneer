@@ -28,8 +28,8 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          cache-from: type=registry,ref={{ steps.meta.outputs.tags }}:buildcache
-          cache-to: type=registry,ref={{ steps.meta.outputs.tags }}:buildcache,mode=max
+          cache-from: type=registry,ref={{ steps.meta.outputs.tags }}
+          cache-to: type=registry,ref={{ steps.meta.outputs.tags }}
 
   Deploy: # job name
     needs: push-image-to-docker-hub

@@ -22,8 +22,8 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.repo_name }}:${{ secrets.DOCKERHUB_USERNAME }}:latest
-          cache-from: type=registry,ref=${{ secrets.repo_name }}:${{ secrets.DOCKERHUB_USERNAME }}:latest
+          tags: ${{ secrets.repo_name }}/${{ secrets.DOCKERHUB_USERNAME }}:latest
+          cache-from: type=registry,ref=${{ secrets.repo_name }}/${{ secrets.DOCKERHUB_USERNAME }}:latest
           cache-to: type=inline
   Deploy: # job name
     needs: push-image-to-docker-hub

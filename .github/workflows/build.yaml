@@ -22,7 +22,7 @@ jobs:
           images: ${{ secrets.repo_name }}/${{ secrets.DOCKERHUB_USERNAME }}
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v2
         with:
           context: .
           push: true

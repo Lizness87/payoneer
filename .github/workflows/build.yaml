@@ -6,33 +6,25 @@ on:
 
 jobs:
   push-image-to-docker-hub:  # job name
-    runs-on: ubuntu-latest  # runner name : (ubuntu latest version) 
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout # first action : checkout source code
-      uses: actions/checkout@v2 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Set up Docker Buildx # set up docker buildx to push the image
-      uses: docker/setup-buildx-action@v1     
-    - name: Docker meta # generate sanitized tags
-      id: meta
-      uses: docker/metadata-action@v4
-      with:
-        images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.repo_name }}
-        tags: 'latest' 
-    - name: Build and push
-      uses: docker/build-push-action@v2 # build and push the image
-      with:
-        context: .
-        file: ./Dockerfile
-        builder: ${{ steps.buildx.outputs.name }}
-        push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.repo_name }}:latest:buildcache #use caching to reduce the build time
-        cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.repo_name }}:latest:buildcache,mode=max
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.repo_name }}:${{ secrets.DOCKERHUB_USERNAME }}:latest
+          cache-from: type=registry,ref=${{ secrets.repo_name }}:${{ secrets.DOCKERHUB_USERNAME }}:latest
+          cache-to: type=inline
   Deploy: # job name
     needs: push-image-to-docker-hub
     runs-on: ubuntu-latest   

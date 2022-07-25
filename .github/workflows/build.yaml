@@ -22,11 +22,10 @@ jobs:
           images: ${{ secrets.repo_name }}/${{ secrets.DOCKERHUB_USERNAME }}
       - name: Build and push
         id: docker_build
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3   
         with:
           context: .
           push: true
-          registry: docker.io
           tags: ${{ steps.meta.outputs.tags }} 
           cache-from: type=registry,ref={{ steps.meta.outputs.tags }}
           cache-to: type=inline

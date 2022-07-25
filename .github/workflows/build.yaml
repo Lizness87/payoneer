@@ -27,8 +27,8 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }} 
-          # cache-from: type=registry,ref={{ steps.meta.outputs.tags }}
-          # cache-to: type=inline
+          cache-from: type=registry,ref={{ steps.meta.outputs.tags }}
+          cache-to: type=inline
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
 
